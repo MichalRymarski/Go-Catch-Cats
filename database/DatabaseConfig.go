@@ -18,6 +18,11 @@ func startDBConnection() {
 	if err != nil {
 		panic("failed to migrate database schema")
 	}
+
+	err = db.AutoMigrate(&CatUser{}, &Folder{})
+	if err != nil {
+		panic("failed to migrate database schema")
+	}
 }
 
 func SetupDatabase() {
