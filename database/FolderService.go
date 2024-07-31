@@ -6,7 +6,6 @@ import (
 
 type Folder struct {
 	gorm.Model
-	Id   uint64 `json:"id" gorm:"primarykey, autoincrement"`
 	Name string `json:"name" gorm:"not null, unique"`
 }
 

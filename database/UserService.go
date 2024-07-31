@@ -6,7 +6,6 @@ import (
 
 type CatUser struct {
 	gorm.Model
-	Id       uint64 `json:"id" gorm:"primarykey,autoincrement"`
 	NickName string `json:"nickname" gorm:"not null, unique"`
 	Email    string `json:"email" gorm:"not null, unique"`
 	Password string `json:"password" gorm:"not null"`
@@ -28,6 +27,12 @@ func AddExampleUser() error {
 func AddUser(user *CatUser) error {
 
 	return db.Create(user).Error
+}
+
+func DeleteUser(userNickName string) error {
+	err := db.Where("nick_name =?", userNickName).Delete(&CatUser{}).Error
+
+	return err
 }
 
 func AddDefaultAdmin() error {
